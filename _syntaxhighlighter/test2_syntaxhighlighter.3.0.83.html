@@ -1,0 +1,50 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Python SyntaxHighlighter</title>
+    <script type="text/javascript" src="scripts/shCore.js"></script>
+    <script type="text/javascript" src="scripts/shBrushPython.js"></script>
+    <link type="text/css" rel="stylesheet" href="styles/shCoreDefault.css"/>
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+</head>
+
+<body style="background: white; font-family: Helvetica">
+
+<h1>Hello SyntaxHighlighter</h1>
+<pre class="brush: python">
+
+def cidr_to_prefix (ip_int_or_quads, subnet_mask):
+    """
+    Convert a CIDR address (e.g. "2.224.0.0/13") to a binary prefix with
+    length equal to the subnet mask (e.g. "0000001011100" of length 13 by
+    prepending zeros.
+
+    ip_int_or_quads: either int (e.g. 43253323), by default,
+                     or quads (e.g. "2.224.0.0").
+    subnet_mask: int (e.g. 24) or string (e.g. "24").
+    """
+    mask = int(subnet_mask)
+    try: ip = int(ip_int_or_quads)  # default int ip
+    except: ip = ipv4_dotstr_to_int (ip_int_or_quads)
+    # to binary string (the [2:] is to get rid of the '0b' prefix)
+    prefix = bin (ip >> (32 - mask)) [2:]
+    return int2str (prefix, mask)  # prepending '0's
+
+def mkdir_ifnotexit (dirname):
+    """Returns True if a new dir is created; returns False if dir exists."""
+    if not os.path.isdir(dirname):
+        os.mkdir(dirname)
+        return True
+    else: return False
+
+def tuplist_to_csvstr (tuplelist, head=None):
+    """Convert a list of tuples to a csv string, with an optional header."""
+    lines = [','.join(map(str, tup)) for tup in tuplelist]
+    if head:
+        lines = [','.join(head)] + lines
+    return '\n'.join(lines)
+
+</pre>
+
+</html>

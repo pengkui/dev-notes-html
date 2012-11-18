@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>scoping</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../_syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+<body style="background: white; font-family: Helvetica">
+    <div class="content">
+    
+
+<p>
+<a href="http://www.newsmth.net/bbstcon.php?board=Python&amp;gid=80538">Interesting discussion</a>
+</p>
+
+
+<pre  class="brush: python">
+
+&gt;&gt;&gt; from dis import dis
+&gt;&gt;&gt; x=1
+
+&gt;&gt;&gt; def f1():
+...   print x
+…
+&gt;&gt;&gt; dis(f1)
+  2           0 LOAD_GLOBAL              0 (x)
+              3 PRINT_ITEM
+              4 PRINT_NEWLINE
+              5 LOAD_CONST               0 (None)
+              8 RETURN_VALUE
+
+&gt;&gt;&gt; def f2():
+...   global x
+...   print x
+…
+&gt;&gt;&gt; dis(f2)
+  3           0 LOAD_GLOBAL              0 (x)
+              3 PRINT_ITEM
+              4 PRINT_NEWLINE
+              5 LOAD_CONST               0 (None)
+              8 RETURN_VALUE
+
+&gt;&gt;&gt; def f3():
+...   print x
+...   global x
+...
+&lt;stdin&gt;:3: SyntaxWarning: name 'x' is used prior to global declaration
+&gt;&gt;&gt;
+&gt;&gt;&gt; dis(f3)
+  2           0 LOAD_GLOBAL              0 (x)
+              3 PRINT_ITEM
+              4 PRINT_NEWLINE
+
+  3           5 LOAD_CONST               0 (None)
+              8 RETURN_VALUE
+
+&gt;&gt;&gt; def f4():
+...   x=2
+...   print x
+…
+&gt;&gt;&gt; dis(f4)
+  2           0 LOAD_CONST               1 (2)
+              3 STORE_FAST               0 (x)
+
+  3           6 LOAD_FAST                0 (x)
+              9 PRINT_ITEM
+             10 PRINT_NEWLINE
+             11 LOAD_CONST               0 (None)
+             14 RETURN_VALUE
+
+&gt;&gt;&gt; def f5():
+...   print x
+...   x=2
+...
+&gt;&gt;&gt; dis(f5)
+  2           0 LOAD_FAST                0 (x)
+              3 PRINT_ITEM
+              4 PRINT_NEWLINE
+
+  3           5 LOAD_CONST               1 (2)
+              8 STORE_FAST               0 (x)
+             11 LOAD_CONST               0 (None)
+             14 RETURN_VALUE
+&gt;&gt;&gt; f5()
+Traceback (most recent call last):
+  File "&lt;stdin&gt;", line 1, in &lt;module&gt;
+  File "&lt;stdin&gt;", line 2, in f5
+UnboundLocalError: local variable 'x' referenced before assignment
+
+</pre>
+
+    </div>
+</body>
+
+</html>

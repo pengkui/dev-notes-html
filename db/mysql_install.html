@@ -1,0 +1,132 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>mysql_install</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" 
+        src="../_syntaxhighlighter/scripts/shCore.js"></script>
+
+    <link type="text/css" rel="stylesheet" 
+        href="../_syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">
+        SyntaxHighlighter.all();</script>
+
+</head>
+
+<body style="background: white; font-family: Helvetica">
+
+    <div class="content">
+
+    
+<p>
+Recipes
+</p>
+
+<p>
+1. Compile MySQL from source and install it without root
+</p>
+
+<p>
+On server 'maximus.cs.umn.edu'
+% tar xvf mysql-5.5.28.tar.gz   
+% cd mysql-5.5.28
+% cmake -DCMAKE_INSTALL_PREFIX:PATH=/export/scratch/pluo/mysql .
+% make -j 10
+% make install
+</p>
+
+
+<p>
+2. Server Setup
+</p>
+
+<p>
+% vim ~/.cshrc
+setenv MYSQL_HOME /export/scratch/pluo/mysql
+and add MYSQL_HOME/bin to PATH
+</p>
+
+<p>
+% cd /export/scratch/pluo/mysql
+% vim my.cnf
+...
+<a href="http://tech.zhenhua.info/2009/01/install-and-configure-mysql-as-non-root.html">http://tech.zhenhua.info/2009/01/install-and-configure-mysql-as-non-root.html</a>
+</p>
+
+<p>
+Initialize system tables:
+% bin/mysql_install_db --datadir=$MYSQL_HOME/data
+</p>
+
+<p>
+Show all tables:
+% mysqlshow
+or using root to see also system tables
+% mysqlshow -u root -p
+</p>
+
+<p>
+Start the mysql server
+% mysqld_safe --default-file=$MYSQL_HOME/my.cnf
+</p>
+
+<p>
+Create the root password:
+% mysqladmin -u root password '[new-password]'
+</p>
+
+<p>
+Grant access of a 'test' db to a remote host:
+% mysql -u root -p
+mysql&gt; GRANT ALL ON test.* TO user1@'mingus.cs.umn.edu' IDENTIFIED BY '[user1_passwd]'; 
+To grant access to all hosts:
+mysql&gt; GRANT ALL ON test.* TO user1@'%' IDENTIFIED BY '[user1_passwd]'; 
+</p>
+
+
+<p>
+3. Client 'mingus.cs.umn.edu' connecting
+</p>
+
+<p>
+Tesing using the mysql command:
+% module load soft/mysql
+% mysql -u user1 -p -h 'maximus.cs.umn.edu'
+mysql&gt; show databases;
+mysql&gt; use test;
+</p>
+
+<p>
+Or in Python shell (with mysql-python installed):
+&gt;&gt;&gt; import MySQLdb as mysql
+&gt;&gt;&gt; db = sql.connect(host='maximus.cs.umn.edu', user='[user1]', passwd='[user1_passwd]') 
+&gt;&gt;&gt; db.stat()
+&gt;&gt;&gt; db.select_db('test')
+</p>
+
+<p>
+References:
+</p>
+
+<p>
+<a href="http://tech.zhenhua.info/2009/01/install-and-configure-mysql-as-non-root.html">http://tech.zhenhua.info/2009/01/install-and-configure-mysql-as-non-root.html</a>
+</p>
+
+<p>
+<a href="http://mysql-python.sourceforge.net/MySQLdb.html">http://mysql-python.sourceforge.net/MySQLdb.html</a>
+</p>
+
+<p>
+<a href="http://www.cyberciti.biz/tips/how-do-i-enable-remote-access-to-mysql-database-server.html">http://www.cyberciti.biz/tips/how-do-i-enable-remote-access-to-mysql-database-server.html</a>
+</p>
+
+
+    </div>
+
+</body>
+
+</html>

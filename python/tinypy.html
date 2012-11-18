@@ -1,0 +1,114 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>tinypy</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../_syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+<body style="background: white; font-family: Helvetica">
+    <div class="content">
+    
+
+<p>
+Data structures of TinyPy
+</p>
+
+<pre  class="brush: cpp">
+
+typedef union tp_obj {
+    int type;
+    struct { int type; double val; } number;
+    struct { int type; struct _tp_list *val; } list;
+    //struct { int type; struct _tp_dict *val; } dict;
+    //other structs...
+} tp_obj;
+
+typedef struct _tp_list {
+    int gci;
+    tp_obj *items;
+    int len;
+    int alloc;
+} _tp_list;
+
+//typedef struct _tp_dict {
+//    int gci;
+//    struct { int used; int hash; tp_obj key; tp_obj val; } *items;
+//    int len;
+//    int alloc;
+//    int cur;
+//    int mask;
+//    int used;
+//} _tp_dict;
+
+</pre>
+
+<p>
+比如p是指向表示 [1.0, 2.0, 3.0] 的union的指针，而 p-&gt;type==4 表示这是一个列表类型
+</p>
+
+<p>
+x=p-&gt;list.val 就是指向一个表示动态指针数组的结构体的指针
+</p>
+
+<p>
+x1=*x-&gt;items 就得到表示该列表第一个元素的union。注意到 x1.type==1 表示x1是数字类型，该元素的值就是 x1.number.val==1.0
+</p>
+
+<p>
+第二个元素的union这样得到 x2=*(&amp;x1+sizeof(x1))，我们有 x2.type==1 和 x2.number.val==2.0
+</p>
+
+<p>
+第三个元素的union是 x3=*(&amp;x2+sizeof(x2))，类似的 x3.type==1 和 x3.number.val==3.0
+</p>
+
+
+<p>
+Compared with CPython implementation <a href="http://svn.python.org/view/python/trunk/Include/object.h?view=markup">object.h</a> and <a href="http://svn.python.org/view/python/trunk/Include/listobject.h?view=markup">listobject.h</a>
+</p>
+
+<pre  class="brush: cpp">
+
+typedef struct _object {
+    struct _object *_ob_next;
+    struct _object *_ob_prev;
+    Py_ssize_t ob_refcnt;
+    struct _typeobject *ob_type;
+} PyObject;
+
+typedef struct {
+    struct _object *_ob_next;
+    struct _object *_ob_prev;
+    Py_ssize_t ob_refcnt;
+    struct _typeobject *ob_type;
+    py_ssize_t ob_size;
+    PyObject **ob_item;
+    Py_ssize_t allocated;
+} PyListObject;
+
+typedef Py_ssize_t (*lenfunc)(PyObject *);
+
+</pre>
+
+<p>
+struct _typeobject 是一个巨无霸……
+</p>
+
+    </div>
+</body>
+
+</html>
