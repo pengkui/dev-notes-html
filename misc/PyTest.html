@@ -1,0 +1,79 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>PyTest</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../.syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+<body style="background: white; font-family: Helvetica">
+    <div class="content">
+    
+
+<p>
+Test my python code:
+</p>
+
+<pre  class="brush: python">
+
+class TestHello (Object):
+    """HiHi."""
+
+    def __init__ (self):
+        self.name = None
+</pre>
+
+<p>
+How about C code?
+</p>
+
+<pre  class="brush: cpp">
+
+/*
+ * Convert an IPv4 dotted string to its 32-bit int
+ * Python equivalent: ipstr2int = \
+ * lambda ipstr: reduce(lambda x, y: (x &lt;&lt; 8) | y, map(int, ipstr.split('.')))
+ */
+long ipv4_dotstr_to_int (const char * ipdotstr)
+{
+    long iplong = 0;
+    char *_ipdotstr = strdup (ipdotstr);
+    char ** quads = split_(_ipdotstr, ".", 4);
+    int i;
+    for (i=0; i&lt;4; i++) {
+        iplong = (iplong &lt;&lt; 8) | atoi(quads[i]);
+    }
+    free (_ipdotstr);
+    free (quads);
+    return iplong;
+}
+
+
+/* Whether a given string is an IPv4 address. */
+// http://stackoverflow.com/questions/791982/determine-if-a-string-is-a-valid-ip-address-in-c
+int is_valid_ipv4_addr (const char * ipstr)
+{
+    struct sockaddr_in sa;
+    int n = inet_pton (AF_INET, ipstr, &amp;(sa.sin_addr));
+    return n !=	0; /* 1 or 0 */
+}
+
+</pre>
+
+    </div>
+</body>
+
+</html>

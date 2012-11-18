@@ -1,0 +1,108 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>types</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../.syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../.syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+<body style="background: white; font-family: Helvetica">
+    <div class="content">
+    
+
+<p>
+"Variables" 
+</p>
+
+<p>
+“变量”(variables)一般是静态语言的概念， 变量本身携带类型信息，并可以被赋值。
+</p>
+
+<p>
+而Python是纯面向对象的动态语言，一切“东西”（注1）都是对象，每个对象都有类型，其类型信息由对象本身携带（参见其_<em>class</em>_属性），而不是由一个另外的“变量”来指示，因此Python世界其实不存在传统意义上的“变量”的概念，也就谈不上“给变量赋值”。这是一种非常纯粹的面向对象的设计。 
+</p>
+
+<p>
+为了标识一个Python对象，我们通常需要把标识符 (names) 绑定到该对象的引用上，比如a=1; b=a表示创建一个值属性为1的整型对象，然后把该对象的引用绑定给标识符a和b——这里a和b只是标识符而已，不是“变量”，本身不包含任何类型信息；所以你可以把标识符a重新绑定到另外一个不同类型的对象，比如a=set()。这样的重新绑定通常给初学者一个假象：“变量a可以一会儿是整数，一会儿又变成集合，可见Python是一门弱类型的语言。”如果没有首先意识到Python对象的类型是由对象自带而不是由引用它的标识符所携带，那么死扣“强类型”还是“弱类型”的定义（注2）是没有意义的。 
+</p>
+
+<p>
+注1：比如具体某个整数、字符串、函数、方法、模块 (modules)、代码对象 (code objects)、帧 (frames)、具体的类/类型本身（比如自定义类、整数类型 (type ‘int’)）、类型类型 (type ‘type’)、甚至对象类型 (type ‘object’) 本身，都是对象，或者说都是对象类型 (type ‘object’) 的实例。 
+</p>
+
+<p>
+注2：Python是动态类型 (dynamically typed) 语言，因为对象的类型检查是在运行时而不是在编译期进行的；而Python同时也是强类型 (strongly typed) 语言，因为不同类型的对象之间的操作有非常严格的限制，隐式类型转换几乎不存在（比如'x'+1是不允许的）。在这个意义上，一些静态类型 (statically typed) 语言（比如C语言），还有某些动态类型语言（比如Javascript和Perl），其实是弱类型 (weakly typed) 的。 
+</p>
+
+<p>
+所谓“编译”，就是把代码翻译能直接在机器上执行的指令。 操作系统是机器，虚拟机也是机器。
+</p>
+
+
+<p>
+type===class
+</p>
+
+<p>
+“isinstance(x, C)”
+Is object x an instance of type C?
+Is element x in set C?
+</p>
+
+<p>
+“issubclass(A, B)”
+Is type A a subtype of type B? i.e.
+Is an instance of type A (i.e. a type-A object) also an instance of type B? i.e.
+isinstance(x, A) =&gt; isinstance(x, B)
+</p>
+
+
+<p>
+In C/C++, variables are memory locations with names. "Declaring a variable puts a name to that memory location and associates a type with that memory location."
+"In Python the expression y=x gives two names (x and y) to the same object, but in C++ that same expression copies the value of x into the location named by y."
+</p>
+
+<p>
+C++/Java's primitive types compromise its object system's integrity. 
+Python trades its runtime performance for its object system's integrity. There are no primitive types as in Java/C++. Everything (in a literal sense) in Python is an object.
+</p>
+
+<p>
+Python programmers may be supprised that 
+</p>
+
+<p>
+<a href="http://www.python.org/download/releases/2.2.3/descrintro/">Guido's article</a>
+</p>
+
+<p>
+<a href="http://www.newsmth.net/bbstcon.php?board=Python&amp;gid=94403&amp;start=94403&amp;pno=1">debate on "strongly typed"</a>
+</p>
+
+<p>
+<a href="http://www.cafepy.com/article/python_types_and_objects/">http://www.cafepy.com/article/python_types_and_objects/</a>
+</p>
+
+
+<p>
+Guido on dynamic typing (18:40-26:05)
+<a href="http://www.youtube.com/watch?v=EBRMq2Ioxsc">http://www.youtube.com/watch?v=EBRMq2Ioxsc</a>
+</p>
+
+    </div>
+</body>
+
+</html>

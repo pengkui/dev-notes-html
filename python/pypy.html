@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+    <title>pypy</title>
+
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" 
+        src="../.syntaxhighlighter/scripts/shCore.js"></script>
+
+    <link type="text/css" rel="stylesheet" 
+        href="../.syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">
+        SyntaxHighlighter.all();</script>
+
+</head>
+
+<body style="background: white; font-family: Helvetica">
+
+    <div class="content">
+
+    
+
+<p>
+<a href="http://www.newsmth.net/bbstcon.php?board=Python&amp;gid=85561">discussion</a>
+</p>
+
+<p>
+<a href="http://www.newsmth.net/bbscon.php?bid=284&amp;id=95506">http://www.newsmth.net/bbscon.php?bid=284&amp;id=95506</a>
+整个PyPy项目主要是两部分：
+</p>
+
+<p>
+<a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.142.1457">http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.142.1457</a>
+1. RPython translation toolchain，包括RPython这个静态编译语言、 其编译器前端实现、以及C/LLVM/CLI/JVM后端，外加一个JIT生成器。
+</p>
+
+<p>
+<a href="http://dl.acm.org/citation.cfm?id=1565827">http://dl.acm.org/citation.cfm?id=1565827</a>
+2. PyPy，就是按Python语言标准把Python解释器重写了一遍，只不过用的RPython语言，而不是C/Java/C#。
+</p>
+
+<p>
+精华在第一项；第二项工作量虽然大，相比之下没有前者那么non-trivial。
+</p>
+
+<p>
+<a href="http://morepypy.blogspot.com/2009/03/applying-tracing-jit-to-interpreter.html">http://morepypy.blogspot.com/2009/03/applying-tracing-jit-to-interpreter.html</a>
+所谓的JIT加速也是第一项的成果。因为PyPy的tracing JIT跟其他动态语言的tracing JIT不一样，它不是直接对用户的Python程序做tracing，而是间接地对PyPy这个用RPython实现的Python解释器做tracing。这样的好处，一是可以回避“为Python写编译器”这个棘手问题，而只要写解释器就够了，一旦解释器层面上的某条执行热路径（主要都在bytecode dispatch loop里）被检测到，该路径就被JIT编译成机器代码；二是这样一个JIT编译器不局限于PyPy解释器，你完全可用RPython为另一种语言（比如简单的PL/0、Scheme、BrainFuck之类）实现一个解释器，不但比用C写轻松得多，还免费生成一个该解释器的JIT编译器。 
+</p>
+
+
+<p>
+Best RPython/PyPy Tutorials:
+</p>
+
+<p>
+<a href="http://morepypy.blogspot.com/2011/04/tutorial-writing-interpreter-with-pypy.html">Writing an Interpreter with RPython</a>
+</p>
+
+<p>
+<a href="http://morepypy.blogspot.com/2011/04/tutorial-part-2-adding-jit.html">Adding a JIT to your Interpreter</a>
+</p>
+
+
+<p>
+References:
+</p>
+
+<p>
+<a href="http://tratt.net/laurie/tech_articles/articles/fast_enough_vms_in_fast_enough_time">http://tratt.net/laurie/tech_articles/articles/fast_enough_vms_in_fast_enough_time</a>
+</p>
+
+
+    </div>
+
+</body>
+
+</html>
