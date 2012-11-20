@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>viki_examples</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../~syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+<body style="background: white; font-family: Helvetica">
+
+    <div class="content">
+
+    
+
+<h2 id="toc_0.1">Examples of VimWiki Syntax</h2>
+
+<h4 id="toc_0.1.0.1">Code highlighting</h4>
+<pre  class="brush: python">
+def foobar():
+    return
+</pre>
+
+<h4 id="toc_0.1.0.2">typefaces</h4>
+<p>
+<strong>bold</strong> <em>italic</em> <del>strikeout</del> <code>code</code> super<sup><small>script</small></sup> sub<sub><small>script</small></sub>
+</p>
+
+<h4 id="toc_0.1.0.3">Tables</h4>
+<table class='center'>
+<tr>
+<th>
+Year
+</th>
+<th>
+Temperature (low)
+</th>
+<th>
+Temperature (high)
+</th>
+</tr>
+<tr>
+<td>
+1910
+</td>
+<td>
+-15
+</td>
+<td>
+30
+</td>
+</tr>
+<tr>
+<td>
+1920
+</td>
+<td>
+-10
+</td>
+<td>
+32
+</td>
+</tr>
+<tr>
+<td>
+1930
+</td>
+<td>
+<em>N/A</em>
+</td>
+<td>
+<em>N/A</em>
+</td>
+</tr>
+</table>
+
+<h4 id="toc_0.1.0.4">Math formulae (rendered by MathJax)</h4>
+<p>
+Inline math formula, e.g. \(\sum_i a_i^2 = 1\), is supported.
+</p>
+
+<p>
+Centered formula in one line:
+</p>
+\[
+\sum_i a_i^2
+= 1
+\]
+
+<p>
+Multiline formulae (note: no space before %align%):
+</p>
+\begin{align}
+\sum_i a_i^2 &amp;= 1 + 1\\
+&amp;= 2.
+\end{align}
+
+<h4 id="toc_0.1.0.5">Blockquotes</h4>
+<blockquote>
+Text started with 4 or more spaces is a blockquote.
+It is not highlighted in vim but could be styled by CSS.
+</blockquote>
+
+<h4 id="toc_0.1.0.6">Comments</h4>
+<p>
+Text line starting with %% is a comment, e.g.
+</p>
+
+<h4 id="toc_0.1.0.7">Horizontal line</h4>
+<p>
+4 or more dashes at the start of the line is a
+<hr />
+</p>
+
+<h4 id="toc_0.1.0.8">More</h4>
+
+<p>
+text
+</p>
+
+
+    </div>
+
+</body>
+
+</html>
