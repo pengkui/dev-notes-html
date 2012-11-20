@@ -1,0 +1,250 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>unicode</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../~syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+
+<body style="background: white; font-family: Helvetica">
+
+<div class="content">
+
+
+
+<p>
+Basic concepts
+</p>
+<ul>
+<li>
+A code point: an integer value in base 16, representing some particular character (<em>what is the difference between a code point and a character?</em>)
+
+<li>
+A Unicode string: a sequence of code points, each valued from 0 to 0x10FFFF.
+
+<li>
+Encoding: the <em>rules</em> for translating a Unicode string into a sequence of bytes (each valued from 0 to 0xFF) to be stored in memory or disk.
+
+</ul>
+
+<p>
+Unicode code point ranges of different character sets
+</p>
+<ul>
+<li>
+ASCII: 0-0x7F
+
+<li>
+Latin-1 (aka. ISO-8859-1): 0-0xFF
+
+</ul>
+
+<p>
+UTF-8 design
+</p>
+<ul>
+<li>
+An ASCII character is encoded using only one byte (high-order bit = 0). And string of ASCII-encoded text is also valid UTF-8-encoded text.
+
+<li>
+Different leading bits schemes (0, 10, 110, 1110, ...) are used to signal the role of a byte. The following table is self-explanotory.
+
+<li>
+Self-synchronizing: character boundaries are clear. In the leading byte of a character, the number of leading 1's tells the total number of bytes for this character.
+
+</ul>
+
+<table class='center'>
+<tr>
+<th>
+Bits
+</th>
+<th>
+Last code point
+</th>
+<th>
+Byte 1
+</th>
+<th>
+Byte 2
+</th>
+<th>
+Byte 3
+</th>
+<th>
+Byte 4
+</th>
+</tr>
+<tr>
+<td>
+7
+</td>
+<td>
+U+007F
+</td>
+<td>
+0xxxxxxx
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+</tr>
+<tr>
+<td>
+11
+</td>
+<td>
+U+07FF
+</td>
+<td>
+110xxxxx
+</td>
+<td>
+10xxxxxx
+</td>
+<td>
+&nbsp;
+</td>
+<td>
+&nbsp;
+</td>
+</tr>
+<tr>
+<td>
+16
+</td>
+<td>
+U+FFFF
+</td>
+<td>
+1110xxxx
+</td>
+<td>
+10xxxxxx
+</td>
+<td>
+10xxxxxx
+</td>
+<td>
+&nbsp;
+</td>
+</tr>
+<tr>
+<td>
+21
+</td>
+<td>
+U+1FFFFF
+</td>
+<td>
+11110xxx
+</td>
+<td>
+10xxxxxx
+</td>
+<td>
+10xxxxxx
+</td>
+<td>
+10xxxxxx
+</td>
+</tr>
+</table>
+
+<p>
+For example, the Euro sign has an Unicode code point U+20AC (00100000 10101100), between U+07FF and U+FFFF. So UTF-8 encodes it to the following three bytes
+</p>
+<blockquote>
+<em>1110</em> <strong>0010</strong>  (0xE2)   
+<em>10</em> <strong>000010</strong>  (0x82)   
+<em>10</em> <strong>101100</strong>  (0xAC)   
+</blockquote>
+
+<p>
+Advantage of UTF-8
+</p>
+<ul>
+<li>
+Backward compatible with ASCII
+
+<li>
+No complications of endianness and BOM (byte order marks) in UTF-16 and UTF-32
+
+</ul>
+
+<p>
+Decode vs. Encode:
+</p>
+<ul>
+<li>
+decode: decodes bytes to a string, using the registered/default codec for encoding. 
+
+<li>
+encode: encodes a string to bytes. A string calls its encode() method  using the registered/default codec for encoding. 
+
+</ul>
+
+<pre  class="brush: python">
+#!/usr/bin/env python
+# -*- coding: utf-8 -*-
+</pre>
+<p>
+This coding statement after the shebang is just to tell the Python intepreter that this file uses Unicode (using urf-8 encoding algorithm). But your editor can save this file into whatever charater set it wants. So you need to ask your editor to save the file to Unicode.
+</p>
+
+
+<p>
+References:
+</p>
+<ul>
+<li>
+<a href="http://www.cs.tut.fi/~jkorpela/unicode/guide.html">Jukka Korpela's Guide to the Unicode standard</a>
+
+<li>
+<a href="http://en.wikipedia.org/wiki/UTF-8">http://en.wikipedia.org/wiki/UTF-8</a>
+
+<li>
+<a href="http://docs.python.org/2/howto/unicode.html">Python2 Unicode HOWTO v1.03</a>
+
+<li>
+<a href="http://www.joelonsoftware.com/articles/Unicode.html">http://www.joelonsoftware.com/articles/Unicode.html</a>
+
+</ul>
+
+<p>
+参考
+</p>
+<ul>
+<li>
+<a href="http://bbs.chinaunix.net/thread-1431029-1-1.html">Python的中文处理</a>
+
+</ul>
+
+
+</div>
+
+</body>
+
+</html>
