@@ -1,0 +1,124 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>git</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../~syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+
+<body style="background: white; font-family: Helvetica">
+
+<div class="content">
+
+
+
+<h3 id="toc_0.0.1">Project Creation</h3>
+<pre  class="brush: bash">
+
+    echo "Initialize your own project"
+    git init
+    
+    cho "Or clone an existing Git project"
+    git clone git://github.com/pengkui/techwiki.git
+     
+    echo "Start to track new files"
+    git add newfile1 newfile2 ...
+</pre>
+
+<h3 id="toc_0.0.2">A Typical Scenario: the Modified-View-Stage-Commit workflow</h3>
+<p>
+<img src="http://git-scm.com/figures/18333fig0201-tn.png" />
+<img src="http://learn.github.com/images/staging.png" />
+</p>
+<pre  class="brush: bash">
+
+    echo "Assume changes were made on some files"
+    vim oldfile1
+    vim oldfile2
+    vim oldfile3
+    
+    echo "Display changes (both staged and not-yet-staged) since the previous commit"
+    git status
+    
+    echo "Display not-yet-staged changes line-by-line"
+    git diff
+    
+    echo "Display staged changes line-by-line"
+    git diff --staged
+    
+    echo "Stage changes for commit (i.e. add modified-but-not-yet-staged files into the staging area)"
+    git add oldfile1 oldfile2
+    
+    echo "Recursively add/stage all files under the current working dir"
+    git add .
+    
+    echo "Commit all staged changes"
+    git commit -m "comments"
+    
+    echo "Use the -a switch to auto stage all modified-but-not-yet-staged changes, and then commit"
+    git commmit -a -m "comments"
+</pre>
+
+
+<h3 id="toc_0.0.3">Branching and Merging</h3>
+
+<h3 id="toc_0.0.4">Working with Remotes</h3>
+<pre  class="brush: bash">
+
+    git pull upstream master
+    git push origin master
+</pre>
+
+
+<p>
+Easy-to-follow tutorials provided by GitHub
+</p>
+<ul>
+<li>
+<a href="http://learn.github.com/p/setup.html">Git Setup</a>
+
+<li>
+<a href="http://learn.github.com/p/normal.html">Git Normal Workflow</a>
+
+<li>
+<a href="http://learn.github.com/p/branching.html">Branching and Merging</a>
+
+<li>
+<a href="http://learn.github.com/p/remotes.html">Working with Remotes</a>
+
+</ul>
+
+<p>
+References
+</p>
+<ul>
+<li>
+<a href="http://gitref.org/">http://gitref.org/</a>
+
+<li>
+<a href="http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Viewing-Your-Staged-and-Unstaged-Changes">http://git-scm.com/book/en/Git-Basics-Recording-Changes-to-the-Repository#Viewing-Your-Staged-and-Unstaged-Changes</a>
+
+</ul>
+
+
+</div>
+
+</body>
+
+</html>

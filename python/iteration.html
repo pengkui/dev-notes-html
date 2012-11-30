@@ -1,0 +1,63 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+
+<head>
+
+    <title>iteration</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+    <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJScript.js"></script>
+
+    <link type="text/css" rel="stylesheet" href="../~syntaxhighlighter/styles/shCoreDefault.css"/>
+
+    <script type="text/javascript">SyntaxHighlighter.all();</script>
+
+</head>
+
+
+<body style="background: white; font-family: Helvetica">
+
+<div class="content">
+
+
+
+<ul>
+<li>
+Iterable: A container object (e.g. <code>list</code>, <code>tuple</code>, <code>set</code>, <code>str</code>, <code>dict</code>, <code>file</code>, etc.) that supports iterating over its members (via <code>for</code> statement, <code>zip()</code>, <code>map()</code>, etc.) in a deterministic order. This definition is by behavior; and there is no such type called <code>iterable</code> per se. Operationally, an iterable must define <code>__iter__()</code> or <code>__getitem__()</code> method.
+
+</ul>
+
+<ul>
+<li>
+Iterator: An iterable object with both <code>next()</code> and <code>__iter__()</code> methods implemented. Unlike non-iterator iterables, an iterator's <code>__iter__()</code> method returns itself. For example, a <code>dict</code> is a non-iterator (and non-sequence BTW) iterable, which does not have a <code>next()</code> method but can be iterated via a <code>for</code>-statement.
+
+</ul>
+
+<ul>
+<li>
+Generator: A special function that <em>behaves as</em> an iterator (note: the official glossary document is wrong at saying that it "returns an iterator"). "It looks like a normal function except that it contains <code>yield</code> statements for producing a series a values usable in a <code>for</code>-loop or that can be retrieved one at a time with the <code>next()</code> function."
+
+</ul>
+
+<p>
+References:
+</p>
+<ul>
+<li>
+<a href="http://docs.python.org/2/glossary.html">http://docs.python.org/2/glossary.html</a>
+
+</ul>
+
+
+</div>
+
+</body>
+
+</html>
