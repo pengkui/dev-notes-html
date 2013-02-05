@@ -6,22 +6,27 @@
     <title>types</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
-    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shCore.js"></script>
-    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushPython.js"></script>
-    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushCpp.js"></script>
-    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushBash.js"></script>
-    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushJava.js"></script>
-    <script type="text/javascript" src="../_syntaxhighlighter/scripts/shBrushJScript.js"></script>
+    <script type="text/javascript" src="https://c328740.ssl.cf1.rackcdn.com/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shCore.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushPython.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushCpp.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushBash.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJava.js"></script>
+    <script type="text/javascript" src="../~syntaxhighlighter/scripts/shBrushJScript.js"></script>
 
-    <link type="text/css" rel="stylesheet" href="../_syntaxhighlighter/styles/shCoreDefault.css"/>
+    <link type="text/css" rel="stylesheet" href="../~syntaxhighlighter/styles/shCoreDefault.css"/>
 
     <script type="text/javascript">SyntaxHighlighter.all();</script>
 
 </head>
 
+
 <body style="background: white; font-family: Helvetica">
-    <div class="content">
-    
+
+<div class="content">
+
+
 
 <p>
 "Variables" 
@@ -53,8 +58,80 @@
 
 
 <p>
-type===class
+In C/C++, variables are memory locations with names. "Declaring a variable puts a name to that memory location and associates a type with that memory location."
+"In Python the expression y=x gives two names (x and y) to the same object, but in C++ that same expression copies the value of x into the location named by y."
 </p>
+
+<p>
+C++/Java's primitive types compromise its object system's integrity. 
+Python trades its runtime performance for its object system's integrity. There are no primitive types as in Java/C++. Everything (in a literal sense) in Python is an object.
+</p>
+
+<p>
+Python programmers may be supprised that 
+</p>
+
+
+<p>
+Axioms:
+1. Every "entity" has a type. More accurately, every entity (including a type) is an instance of certain type (or identically, class).
+2. 
+</p>
+
+<p>
+When we say something is an object, we mean it is an instance of &lt;type <code>object</code>&gt;. Every "thing" or "entity" in Python is an object, including &lt;type <code>object</code>&gt; itself and &lt;type <code>type</code>&gt;.
+</p>
+
+<p>
+You may use the _<em>class</em>_ attribute of any objects or the isinstance() check to explore the instance-class relationships.
+</p>
+
+<p>
+As you can see below, as an object/instance, &lt;type <code>Exception</code>&gt; is an instance of &lt;type <code>type</code>&gt;. Tautologically, any type object (e.g. &lt;type <code>int</code>&gt;, &lt;type <code>object</code>&gt; or &lt;type <code>type</code>&gt; itself) is an instance of &lt;type <code>type</code>&gt;.
+</p>
+
+<p>
+&gt;&gt;&gt; isinstance(Exception, type)
+True
+</p>
+
+<p>
+&gt;&gt;&gt; Exception._<em>class</em>_
+&lt;type 'type'&gt;
+</p>
+
+<p>
+&gt;&gt;&gt; BaseException._<em>class</em>_
+&lt;type 'type'&gt;
+</p>
+
+
+<p>
+You may use the _<em>bases</em>_ attribute of any type objects (whose types are always &lt;type <code>type</code>&gt;) or the issubclass() check to explore the superclass-subclass chains of Python types.
+</p>
+
+<p>
+As you can see below, as a type/class, &lt;type <code>Exception</code>&gt; is a subclass of &lt;type <code>BaseException</code>&gt;; and &lt;type <code>BaseException</code>&gt; subclasses from &lt;type <code>object</code>&gt;. We already know that everything is an instance of &lt;type <code>object</code>&gt;.
+</p>
+
+<p>
+&gt;&gt;&gt; Exception._<em>bases</em>_
+(&lt;type 'exceptions.BaseException'&gt;,)
+</p>
+
+<p>
+&gt;&gt;&gt; BaseException._<em>bases</em>_
+(&lt;type 'object'&gt;,)
+</p>
+
+<p>
+&gt;&gt;&gt; issubclass(Exception, object)
+True
+</p>
+
+
+
+<h3 id="toc_0.0.1">Set theory and Python type system</h3>
 
 <p>
 “isinstance(x, C)”
@@ -70,19 +147,10 @@ isinstance(x, A) =&gt; isinstance(x, B)
 </p>
 
 
-<p>
-In C/C++, variables are memory locations with names. "Declaring a variable puts a name to that memory location and associates a type with that memory location."
-"In Python the expression y=x gives two names (x and y) to the same object, but in C++ that same expression copies the value of x into the location named by y."
-</p>
 
-<p>
-C++/Java's primitive types compromise its object system's integrity. 
-Python trades its runtime performance for its object system's integrity. There are no primitive types as in Java/C++. Everything (in a literal sense) in Python is an object.
-</p>
 
-<p>
-Python programmers may be supprised that 
-</p>
+
+<h3 id="toc_0.0.2">References</h3>
 
 <p>
 <a href="http://www.python.org/download/releases/2.2.3/descrintro/">Guido's article</a>
@@ -102,7 +170,9 @@ Guido on dynamic typing (18:40-26:05)
 <a href="http://www.youtube.com/watch?v=EBRMq2Ioxsc">http://www.youtube.com/watch?v=EBRMq2Ioxsc</a>
 </p>
 
-    </div>
+
+</div>
+
 </body>
 
 </html>

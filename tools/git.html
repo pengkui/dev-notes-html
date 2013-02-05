@@ -34,7 +34,7 @@
     echo "Initialize your own project"
     git init
     
-    cho "Or clone an existing Git project"
+    echo "Or clone an existing Git project"
     git clone git://github.com/pengkui/techwiki.git
      
     echo "Start to track new files"
@@ -75,14 +75,31 @@
     git commmit -a -m "comments"
 </pre>
 
-
-<h3 id="toc_0.0.3">Branching and Merging</h3>
-
-<h3 id="toc_0.0.4">Working with Remotes</h3>
+<h3 id="toc_0.0.3">Working with Remotes</h3>
 <pre  class="brush: bash">
 
     git pull upstream master
     git push origin master
+</pre>
+
+<h3 id="toc_0.0.4">Merging</h3>
+<pre  class="brush: bash">
+
+    echo "Commit local copy before pulling"
+    git commit -a -m "comments"
+
+    echo "Pull"
+    git pull upstream master
+
+    echo "Resolve conflicts in an text editor"
+
+    echo "Stage the resolved files and commit"
+    git commit -a -m "comments"
+
+    echo "Push to the origin"
+    git push origin master
+
+    echo "Ask the maintainer for pulling"
 </pre>
 
 
